@@ -7,5 +7,5 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.75"
-bitreader = "0.3.8"
+bitvec = "1.0.1"
 image = "0.24.7"
