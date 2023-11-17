@@ -40,8 +40,8 @@ fn color_to_qbit(color: Rgb<u8>) -> Option<u8> {
 
 #[derive(Debug, Clone, Copy)]
 pub struct Transgender {
-    width: u32,
-    height: u32,
+    pub width: u32,
+    pub height: u32,
 }
 
 impl Transgender {
