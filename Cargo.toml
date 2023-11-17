@@ -1,7 +1,7 @@
 [workspace]
 name = "translator"
 package.version = "0.0.0"
-package.description = "A small tool to encode and decode messages using trans flags."
+package.description = "A tool to encode and decode messages using LGBTQIA+ flags."
 package.repository = "https://github.com/ChecksumDev/translator"
 package.authors = ["Checksum", "Kittenzexe"]
 package.license = "AGPL-3.0-or-later"
