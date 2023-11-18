@@ -1,0 +1,1 @@
+<p class="font-sans text-stone-100 font-semibold">Settings</p>

@@ -7,4 +7,4 @@ package.authors = ["Checksum", "Kittenzexe"]
 package.license = "AGPL-3.0-or-later"
 package.readme = "README.md"
 
-members = ["lib", "cli", "app"]
+members = ["lib", "cli", "app/src-tauri"]
