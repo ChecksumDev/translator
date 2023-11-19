@@ -79,8 +79,8 @@ impl FlagModule for Transgender {
 
         let mut image = RgbImage::new(self.width, self.height);
         let colors = [BLUE, PINK, WHITE, PINK, BLUE];
-
-        if chunked_bits.len() * 4 > (self.width * self.height * 4) as usize {
+        // as we only encode data in the white pixels we use 1/5 of the height
+        if chunked_bits.len() > (self.width * (self.height / 5)) as usize {
             return Err(anyhow::anyhow!(
                 "The data is too large to encode in this resolution, need at least {} pixels",
                 chunked_bits.len()
@@ -187,7 +187,7 @@ mod tests {
     fn encode_decode() {
         let flag = Transgender::default();
         let data = b"Hello, world!";
-        let encoded = flag.encode_bytes(data).unwrap();
+        let encoded = flag.encode_bytes(*data).unwrap();
         let decoded = flag.decode_bytes(encoded).unwrap();
         assert_eq!(data, decoded.as_slice());
     }
@@ -195,17 +195,14 @@ mod tests {
     #[test]
     fn encode_overflow() {
         let flag = Transgender::new(10, 10);
-        let data = vec![0; 100]; // 100 bytes should not fit in 10x10 pixels
+        let data = vec![0; 11]; // 11 bytes should not fit in 10x10 pixels
 
-        match flag.encode_bytes(data.clone()) {
-            Ok(_) => {
-                assert!(false);
-                return;
-            }
-            Err(e) => {
-                println!("{}", e);
-                assert!(true);
-            }
-        };
+        assert!(flag.encode_bytes(data.clone()).is_err());
+    }
+    #[test]
+    fn encode_limit() {
+        let flag = Transgender::new(10, 10);
+        let data = vec![0; 10]; // 10 bytes should exactly fit in 10x10 pixels
+        assert!(flag.encode_bytes(data).is_ok());
     }
 }
